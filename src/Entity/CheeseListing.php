@@ -48,6 +48,11 @@ class CheeseListing
      */
     private $isPublished;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,9 +75,9 @@ class CheeseListing
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setTextDescription(?string $description): self
     {
-        $this->description = $description;
+        $this->description = nl2br($description);
 
         return $this;
     }
@@ -94,11 +99,9 @@ class CheeseListing
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function getCreatedAtAgo(): string
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        return Carbon::instance($this->getCreatedAt())->diffForHumans();
     }
 
     public function getIsPublished(): ?bool
