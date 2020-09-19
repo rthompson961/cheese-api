@@ -32,7 +32,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
- * @ApiFilter(SearchFilter::class, properties={"title": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "title": "partial",
+ *     "owner": "exact",
+ *     "owner.username": "partial"
+ * })
  * @ApiFilter(RangeFilter::class, properties={"price"})
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=CheeseListingRepository::class)
